@@ -1,15 +1,16 @@
 class Computer:
-    cpu = "cpu - not defined"
-    ram = "ram - not defined"
-    storage = "storage - not defined"
-    gpu: str | None = None
+    def __init__(self):
+        self.cpu = "cpu - not defined"
+        self.ram = "ram - not defined"
+        self.storage = "storage - not defined"
+        self.gpu: str | None = None
 
     def display_configuration(self):
         print(f"Configuration de la computadora\n"
               f"CPU: {self.cpu}\n"
               f"RAM: {self.ram}\n"
               f"Almacenamiento: {self.storage}\n"
-              f"GPU: {"Sin gpu" if self.gpu is None else self.gpu}")
+              f"GPU: {'Sin gpu' if self.gpu is None else self.gpu}")
 
 
 class ComputerBuilder:
