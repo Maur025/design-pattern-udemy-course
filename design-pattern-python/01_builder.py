@@ -1,6 +1,3 @@
-from types import NoneType
-
-
 class Computer:
     cpu = "cpu - not defined"
     ram = "ram - not defined"
