@@ -46,6 +46,8 @@ def main():
     gamer_computer = ComputerBuilder().set_cpu("i7 14700k").set_cpu("i9 14900k").set_ram("128GB").set_storage(
         "4TB").set_gpu("RTX 5090 ti").build()
 
+    print("")
+
     print("Computadora gamer:")
     gamer_computer.display_configuration()
 

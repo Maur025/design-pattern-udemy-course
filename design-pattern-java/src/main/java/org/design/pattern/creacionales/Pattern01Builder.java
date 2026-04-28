@@ -1,11 +1,11 @@
-package org.design.pattern;
+package org.design.pattern.creacionales;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Builder01 {
+public class Pattern01Builder {
 
     public static void main(String[] args) {
         Computer basicComputer = new ComputerBuilder().setCpu("Intel core 2 duo")
