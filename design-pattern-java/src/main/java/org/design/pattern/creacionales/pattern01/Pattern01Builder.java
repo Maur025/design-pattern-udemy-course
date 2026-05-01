@@ -1,4 +1,4 @@
-package org.design.pattern.creacionales;
+package org.design.pattern.creacionales.pattern01;
 
 import lombok.Getter;
 import lombok.Setter;
