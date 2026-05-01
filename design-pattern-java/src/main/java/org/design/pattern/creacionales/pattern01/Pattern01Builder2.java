@@ -1,4 +1,4 @@
-package org.design.pattern.creacionales;
+package org.design.pattern.creacionales.pattern01;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ public class Pattern01Builder2 {
     static void main(String[] args) {
         var usersQuery = new QueryBuilder("users").select("id", "name", "email")
             .where("age > 18")
-            .where("country = Cri")
+            .where("country = 'Cri'")
             .orderBy("name", OrderDirection.ASC)
             .limit(10)
             .execute();
@@ -114,6 +114,6 @@ class QueryBuilder {
                 .append(this.limitCount);
         }
 
-        return query.toString();
+        return query.append(";").toString();
     }
 }

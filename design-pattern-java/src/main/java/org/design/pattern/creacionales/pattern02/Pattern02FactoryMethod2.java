@@ -1,4 +1,4 @@
-package org.design.pattern.creacionales;
+package org.design.pattern.creacionales.pattern02;
 
 import java.util.Scanner;
 import lombok.extern.slf4j.Slf4j;
