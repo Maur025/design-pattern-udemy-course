@@ -12,8 +12,7 @@
  *
  * https://refactoring.guru/es/design-patterns/builder
  */
-
-const { COLORS } = require("../helpers/colors");
+import { COLORS } from "../helpers/colors.js";
 
 class Computer {
 	cpu = "cpu - not defined";
