@@ -1,4 +1,4 @@
-package creacionales01
+package creacionales01.pattern01
 
 class Computer(
     var cpu: String = "cpu - not defined",

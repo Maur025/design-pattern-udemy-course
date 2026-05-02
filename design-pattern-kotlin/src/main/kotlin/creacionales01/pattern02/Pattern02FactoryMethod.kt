@@ -1,4 +1,6 @@
-package creacionales01
+package creacionales01.pattern02
+
+import creacionales01.pattern03.Hamburger
 
 interface Hamburger {
     fun prepare()
