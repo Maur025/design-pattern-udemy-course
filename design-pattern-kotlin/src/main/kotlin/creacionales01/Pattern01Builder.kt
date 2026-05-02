@@ -7,7 +7,7 @@ class Computer(
     var gpu: String? = null
 ) {
     fun displayConfiguration() {
-        print(
+        println(
             """Configuración de la computadora: 
             CPU: ${this.cpu}
             RAM: ${this.ram}
