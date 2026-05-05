@@ -7,3 +7,33 @@
  * * es decir, en tiempo de ejecución y no en tiempo de compilación.
  *
  */
+
+import { COLORS } from "../helpers/colors.ts";
+
+// i18n
+type Language = "es" | "en" | "fr";
+
+function createGreeter(lang: Language) {
+	return function (name: string) {
+		const messages = {
+			es: `Hola, %c${name}!`,
+			en: `Hello, %c${name}!`,
+			fr: `Bonjour, %c${name}!`,
+		};
+
+		return console.log(messages[lang], COLORS.red);
+	};
+}
+
+function main() {
+	const spanishGreeter = createGreeter("es");
+	spanishGreeter("Mauro");
+
+	const englishGreeter = createGreeter("en");
+	englishGreeter("Alice");
+
+	const frenchGreeter = createGreeter("fr");
+	frenchGreeter("Pierre");
+}
+
+main();
