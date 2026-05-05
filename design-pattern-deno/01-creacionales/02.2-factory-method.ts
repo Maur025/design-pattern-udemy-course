@@ -24,8 +24,6 @@
       el prompt para seleccionar el tipo de reporte.
  */
 
-import { COLORS } from "../helpers/colors.ts";
-
 // 1. Definir la interfaz Report
 interface Report {
 	generate(): void;
