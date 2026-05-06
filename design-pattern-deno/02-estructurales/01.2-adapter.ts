@@ -11,74 +11,100 @@
  * https://refactoring.guru/es/design-patterns/adapter
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from "../helpers/colors.ts";
 
 // 1. Interfaz PaymentProcessor
 interface PaymentProcessor {
-  processPayment(amount: number): void;
+	processPayment(amount: number): void;
 }
 
 // 2. Clases de Servicios de Pago Externos
 // Estas clases simulan los servicios externos de PayPal, Stripe y MercadoPago
 
 class PayPalService {
-  sendPayment(amount: number): void {
-    console.log(`Procesando pago de $${amount} con %cPayPal`, COLORS.blue);
-  }
+	sendPayment(amount: number): void {
+		console.log(`Procesando pago de $${amount} con %cPayPal`, COLORS.blue);
+	}
 }
 
 class StripeService {
-  makeCharge(amount: number): void {
-    console.log(`Procesando pago de $${amount} con %cStripe`, COLORS.purple);
-  }
+	makeCharge(amount: number): void {
+		console.log(`Procesando pago de $${amount} con %cStripe`, COLORS.purple);
+	}
 }
 
 class MercadoPagoService {
-  pay(amount: number): void {
-    console.log(
-      `Procesando pago de $${amount} con %cMercadoPago`,
-      COLORS.yellow
-    );
-  }
+	pay(amount: number): void {
+		console.log(`Procesando pago de $${amount} con %cMercadoPago`, COLORS.yellow);
+	}
 }
 
 // 3. Clases Adaptadoras
 
 // Adaptador para PayPal
-class PayPalAdapter {
-  // TODO: Implementar la interfaz PaymentProcessor
+class PayPalAdapter implements PaymentProcessor {
+	// private payPalService = new PayPalService();
+	private payPalService: PayPalService;
+
+	constructor(service: PayPalService) {
+		this.payPalService = service;
+	}
+
+	processPayment(amount: number): void {
+		this.payPalService.sendPayment(amount);
+	}
 }
 
 // Adaptador para Stripe
-class StripeAdapter {
-  // TODO: Implementar la interfaz PaymentProcessor
+class StripeAdapter implements PaymentProcessor {
+	// private stripeService = new StripeService();
+
+	private stripeService: StripeService;
+
+	constructor(service: StripeService) {
+		this.stripeService = service;
+	}
+
+	processPayment(amount: number): void {
+		this.stripeService.makeCharge(amount);
+	}
 }
 
 // Adaptador para MercadoPago
-class MercadoPagoAdapter {
-  // TODO: Implementar la interfaz PaymentProcessor
+class MercadoPagoAdapter implements PaymentProcessor {
+	// private mercadoPagoService = new MercadoPagoService();
+
+	private mercadoPagoService: MercadoPagoService;
+
+	constructor(service: MercadoPagoService) {
+		this.mercadoPagoService = service;
+	}
+
+	processPayment(amount: number): void {
+		this.mercadoPagoService.pay(amount);
+	}
 }
 
 // 4. Código Cliente para probar el Adapter
 
 function main() {
-  const paymentAmount = 100;
+	const paymentAmount = 100;
 
-  // TODO: Agregar los adaptadores para los servicios de pago
-  const paypalProcessor: PaymentProcessor = new PayPalAdapter();
-  const stripeProcessor: PaymentProcessor = new StripeAdapter();
-  const mercadoPagoProcessor: PaymentProcessor = new MercadoPagoAdapter();
+	// TODO: Agregar los adaptadores para los servicios de pago
+	const paypalProcessor: PaymentProcessor = new PayPalAdapter(new PayPalService());
+	const stripeProcessor: PaymentProcessor = new StripeAdapter(new StripeService());
+	const mercadoPagoProcessor: PaymentProcessor = new MercadoPagoAdapter(new MercadoPagoService());
 
-  // Procesar pagos con los diferentes servicios
-  // Los 3 procesadores de pago trabajan exactamente igual después de adaptaros
-  console.log('Usando PayPal:');
-  paypalProcessor.processPayment(paymentAmount);
+	// Procesar pagos con los diferentes servicios
+	// Los 3 procesadores de pago trabajan exactamente igual después de adaptaros
+	console.log("Usando PayPal:");
+	paypalProcessor.processPayment(paymentAmount);
 
-  console.log('\nUsando Stripe:');
-  stripeProcessor.processPayment(paymentAmount);
+	console.log("\nUsando Stripe:");
+	stripeProcessor.processPayment(paymentAmount);
 
-  console.log('\nUsando MercadoPago:');
-  mercadoPagoProcessor.processPayment(paymentAmount);
+	console.log("\nUsando MercadoPago:");
+	mercadoPagoProcessor.processPayment(paymentAmount);
 }
 
 main();
