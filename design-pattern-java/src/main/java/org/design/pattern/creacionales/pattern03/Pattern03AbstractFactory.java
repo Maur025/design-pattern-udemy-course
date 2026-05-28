@@ -1,6 +1,7 @@
 package org.design.pattern.creacionales.pattern03;
 
-import lombok.extern.slf4j.Slf4j;
+import org.design.pattern.util.ConsoleUtil;
+import org.fusesource.jansi.Ansi.Color;
 
 interface Hamburger {
 
@@ -19,17 +20,20 @@ interface RestaurantFactory {
     Drink createDrink();
 }
 
-@Slf4j
 public class Pattern03AbstractFactory {
 
     static void main(String[] args) {
-        log.info("Pedido del menu regular:");
+        ConsoleUtil.initialize();
+
+        ConsoleUtil.println("Pedido del menu regular:");
         execute(new FastFoodRestaurantFactory());
 
-        log.info(" --- --- ---");
+        ConsoleUtil.println("");
 
-        log.info("Pedido del menu saludable:");
+        ConsoleUtil.println("Pedido del menu saludable:");
         execute(new HealthyRestaurantFactory());
+
+        ConsoleUtil.clean();
     }
 
     static void execute(RestaurantFactory factory) {
@@ -41,39 +45,35 @@ public class Pattern03AbstractFactory {
     }
 }
 
-@Slf4j
 class ChickenHamburger implements Hamburger {
 
     @Override
     public void prepare() {
-        log.info("Preparando hamburguesa de Pollo.");
+        ConsoleUtil.println("Preparando hamburguesa de Pollo.", Color.YELLOW);
     }
 }
 
-@Slf4j
 class BeefHamburger implements Hamburger {
 
     @Override
     public void prepare() {
-        log.info("Preparando hamburguesa de Res.");
+        ConsoleUtil.println("Preparando hamburguesa de Res.", Color.RED);
     }
 }
 
-@Slf4j
 class Water implements Drink {
 
     @Override
     public void pour() {
-        log.info("Sirviendo un vaso de agua");
+        ConsoleUtil.println("Sirviendo un vaso de agua", Color.CYAN);
     }
 }
 
-@Slf4j
 class Soda implements Drink {
 
     @Override
     public void pour() {
-        log.info("Sirviendo un vaso de gaseosa");
+        ConsoleUtil.println("Sirviendo un vaso de gaseosa", Color.MAGENTA);
     }
 }
 

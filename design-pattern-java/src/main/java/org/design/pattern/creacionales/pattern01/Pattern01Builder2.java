@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.design.pattern.util.ConsoleUtil;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * ! Patrón Builder: Es un patrón de diseño creacional que nos permite construir objetos complejos
@@ -22,10 +23,11 @@ enum OrderDirection {
     ASC, DESC
 }
 
-@Slf4j
 public class Pattern01Builder2 {
 
     static void main(String[] args) {
+        ConsoleUtil.initialize();
+
         var usersQuery = new QueryBuilder("users").select("id", "name", "email")
             .where("age > 18")
             .where("country = 'Cri'")
@@ -33,7 +35,10 @@ public class Pattern01Builder2 {
             .limit(10)
             .execute();
 
-        log.info("Consulta: {}", usersQuery);
+        ConsoleUtil.print("Consulta: ", Color.BLUE);
+        ConsoleUtil.print(usersQuery);
+
+        ConsoleUtil.clean();
     }
 }
 
@@ -114,6 +119,7 @@ class QueryBuilder {
                 .append(this.limitCount);
         }
 
-        return query.append(";").toString();
+        return query.append(";")
+            .toString();
     }
 }

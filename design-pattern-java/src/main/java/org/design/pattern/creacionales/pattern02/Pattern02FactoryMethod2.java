@@ -1,7 +1,8 @@
 package org.design.pattern.creacionales.pattern02;
 
 import java.util.Scanner;
-import lombok.extern.slf4j.Slf4j;
+import org.design.pattern.util.ConsoleUtil;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * ! Factory Method: El patrón Factory Method permite crear objetos sin especificar la clase exacta
@@ -20,13 +21,15 @@ interface Report {
     void generate();
 }
 
-@Slf4j
 public class Pattern02FactoryMethod2 {
 
     static void main(String[] args) {
+        ConsoleUtil.initialize();
+
         Scanner scanner = new Scanner(System.in);
 
-        log.info("¿Que tipo de reporte deseas? (sales / inventory / accounting)");
+        ConsoleUtil.println("¿Que tipo de reporte deseas? (sales / inventory / accounting)");
+
         String reportType = scanner.nextLine();
 
         ReportFactory reportFactory = switch (reportType) {
@@ -37,33 +40,32 @@ public class Pattern02FactoryMethod2 {
         };
 
         reportFactory.generateReport();
+
+        ConsoleUtil.clean();
     }
 }
 
-@Slf4j
 class SalesReport implements Report {
 
     @Override
     public void generate() {
-        log.info("Generando reporte de ventas...");
+        ConsoleUtil.println("Generando reporte de ventas...", Color.BLUE);
     }
 }
 
-@Slf4j
 class InventoryReport implements Report {
 
     @Override
     public void generate() {
-        log.info("Generando reporte de inventario...");
+        ConsoleUtil.println("Generando reporte de inventario...", Color.GREEN);
     }
 }
 
-@Slf4j
 class AccountingReport implements Report {
 
     @Override
     public void generate() {
-        log.info("Generando reporte de contabilidad...");
+        ConsoleUtil.println("Generando reporte de contabilidad...", Color.MAGENTA);
     }
 }
 

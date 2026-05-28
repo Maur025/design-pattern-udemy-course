@@ -2,7 +2,8 @@ package org.design.pattern.creacionales.pattern01;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.design.pattern.util.ConsoleUtil;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * ! Patrón Builder: Es un patrón de diseño creacional que nos permite construir objetos complejos
@@ -15,16 +16,17 @@ import lombok.extern.slf4j.Slf4j;
  * proceso de construcción sea independiente de las partes que lo componen.
  */
 
-@Slf4j
 public class Pattern01Builder {
 
     public static void main(String[] args) {
+        ConsoleUtil.initialize();
+
         Computer basicComputer = new ComputerBuilder().setCpu("Intel core 2 duo")
             .setRam("4GB")
             .setStorage("256GB")
             .build();
 
-        log.info("Computadora básica:");
+        ConsoleUtil.println("Computadora básica:", Color.BLUE);
         basicComputer.displayConfiguration();
 
         Computer gamerComputer = new ComputerBuilder().setCpu("i7 14700k")
@@ -34,12 +36,13 @@ public class Pattern01Builder {
             .setGpu("RTX 5090 Ti")
             .build();
 
-        log.info("Computer gamer:");
+        ConsoleUtil.println("Computer gamer:", Color.RED);
         gamerComputer.displayConfiguration();
+
+        ConsoleUtil.clean();
     }
 }
 
-@Slf4j
 @Getter
 @Setter
 class Computer {
@@ -50,15 +53,17 @@ class Computer {
     private String gpu;
 
     public void displayConfiguration() {
-        log.info(
+        String gpu = this.gpu != null ? this.gpu : "Sin GPU";
+
+        ConsoleUtil.println(String.format(
             """
                 Configuracion de la computadora:
-                CPU: {}
-                RAM: {}
-                Almacenamiento: {}
-                GPU: {}
-                """, cpu, ram, storage, gpu != null ? gpu : "Sin GPU"
-        );
+                CPU: %s
+                RAM: %s
+                Almacenamiento: %s
+                GPU: %s
+                """, cpu, ram, storage, gpu
+        ));
     }
 }
 

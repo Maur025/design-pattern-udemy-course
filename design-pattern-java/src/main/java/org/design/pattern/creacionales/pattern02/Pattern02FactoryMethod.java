@@ -1,7 +1,8 @@
 package org.design.pattern.creacionales.pattern02;
 
 import java.util.Scanner;
-import lombok.extern.slf4j.Slf4j;
+import org.design.pattern.util.ConsoleUtil;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * ! Factory Method: El patrón Factory Method permite crear objetos sin especificar la clase exacta
@@ -20,14 +21,14 @@ interface Hamburger {
     void prepare();
 }
 
-@Slf4j
 public class Pattern02FactoryMethod {
 
     static void main(String[] args) {
+        ConsoleUtil.initialize();
 
         Scanner input = new Scanner(System.in);
 
-        log.info("¿Que tipo de hamburguesa quieres? (chicken / beef / bean)");
+        ConsoleUtil.println("¿Que tipo de hamburguesa quieres? (chicken / beef / bean)");
         String burgerType = input.next();
 
         Restaurant restaurant = switch (burgerType) {
@@ -38,33 +39,32 @@ public class Pattern02FactoryMethod {
         };
 
         restaurant.orderHamburger();
+
+        ConsoleUtil.clean();
     }
 }
 
-@Slf4j
 class ChickenHamburger implements Hamburger {
 
     @Override
     public void prepare() {
-        log.info("Preparando una hamburguesa de pollo");
+        ConsoleUtil.println("Preparando una hamburguesa de pollo", Color.YELLOW);
     }
 }
 
-@Slf4j
 class BeefHamburger implements Hamburger {
 
     @Override
     public void prepare() {
-        log.info("Preparando una hamburguesa de res");
+        ConsoleUtil.println("Preparando una hamburguesa de res", Color.MAGENTA);
     }
 }
 
-@Slf4j
 class BeanHamburger implements Hamburger {
 
     @Override
     public void prepare() {
-        log.info("Preparando una hamburguesa de frijol");
+        ConsoleUtil.println("Preparando una hamburguesa de frijol", Color.GREEN);
     }
 }
 

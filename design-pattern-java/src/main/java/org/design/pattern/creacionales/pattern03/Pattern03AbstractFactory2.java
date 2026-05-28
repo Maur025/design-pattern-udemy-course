@@ -1,6 +1,7 @@
 package org.design.pattern.creacionales.pattern03;
 
-import lombok.extern.slf4j.Slf4j;
+import org.design.pattern.util.ConsoleUtil;
+import org.fusesource.jansi.Ansi.Color;
 
 interface Vehicle {
 
@@ -19,17 +20,20 @@ interface VehicleFactory {
     Engine createEngine();
 }
 
-@Slf4j
 public class Pattern03AbstractFactory2 {
 
     static void main() {
-        log.info("Creando vehiculo electrico:");
+        ConsoleUtil.initialize();
+
+        ConsoleUtil.println("Creando vehiculo electrico:");
         execute(new ElectricVehicleFactory());
 
-        log.info("-----------------------");
+        ConsoleUtil.println("");
 
-        log.info("Creando vehiculo de combustion:");
+        ConsoleUtil.println("Creando vehiculo de combustion:");
         execute(new GasVehicleFactory());
+
+        ConsoleUtil.clean();
     }
 
     static void execute(VehicleFactory factory) {
@@ -41,39 +45,35 @@ public class Pattern03AbstractFactory2 {
     }
 }
 
-@Slf4j
 class ElectricCar implements Vehicle {
 
     @Override
     public void assemble() {
-        log.info("Ensamblando un auto electrico");
+        ConsoleUtil.println("Ensamblando un auto electrico", Color.MAGENTA);
     }
 }
 
-@Slf4j
 class GasCar implements Vehicle {
 
     @Override
     public void assemble() {
-        log.info("Ensamblando un auto de combustion");
+        ConsoleUtil.println("Ensamblando un auto de combustion", Color.BLUE);
     }
 }
 
-@Slf4j
 class ElectricEngine implements Engine {
 
     @Override
     public void start() {
-        log.info("Arrancando motor electrico");
+        ConsoleUtil.println("Arrancando motor electrico", Color.RED);
     }
 }
 
-@Slf4j
 class GasEngine implements Engine {
 
     @Override
     public void start() {
-        log.info("Arrancando motor de combustion");
+        ConsoleUtil.println("Arrancando motor de combustion", Color.CYAN);
     }
 }
 
