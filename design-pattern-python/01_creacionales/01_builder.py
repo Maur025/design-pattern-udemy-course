@@ -1,3 +1,7 @@
+from rich.console import Console
+
+console = Console()
+
 class Computer:
     def __init__(self):
         self.cpu = "cpu - not defined"
@@ -6,7 +10,7 @@ class Computer:
         self.gpu: str | None = None
 
     def display_configuration(self):
-        print(f"Configuration de la computadora\n"
+        console.print(f"Configuration de la computadora\n"
               f"CPU: {self.cpu}\n"
               f"RAM: {self.ram}\n"
               f"Almacenamiento: {self.storage}\n"
@@ -40,15 +44,15 @@ class ComputerBuilder:
 def main():
     basic_computer = ComputerBuilder().set_cpu("Intel core 2 duo").set_ram("4GB").set_storage("256GB").build()
 
-    print("Computadora básica:")
+    console.print("[blue]Computadora básica:[/blue]")
     basic_computer.display_configuration()
 
     gamer_computer = ComputerBuilder().set_cpu("i7 14700k").set_cpu("i9 14900k").set_ram("128GB").set_storage(
         "4TB").set_gpu("RTX 5090 ti").build()
 
-    print("")
+    console.print("")
 
-    print("Computadora gamer:")
+    console.print("[red]Computadora gamer:[/red]")
     gamer_computer.display_configuration()
 
 
