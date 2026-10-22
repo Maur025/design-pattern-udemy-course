@@ -1,3 +1,5 @@
+from typing import Self
+
 from rich.console import Console
 
 console = Console()
@@ -13,19 +15,19 @@ class Document:
         self.__content = content
         self.author = author
 
-    def clone(self) -> Document:
-        return Document(self.title, self.__content, self.author)
+    def clone(self) -> Self:
+        return type(self)(self.title, self.__content, self.author)
 
     def display_info(self):
-        console.print(f'''
+        console.print(f"""
         Title: {self.title}
         Content: {self.__content}
         Author: {self.author}
-        ''')
+        """)
 
 
 def main():
-    document1 = Document('Cotización', '500 dolares', 'Mauro')
+    document1 = Document("Cotización", "500 dolares", "Mauro")
 
     console.print(document1)
     document1.display_info()

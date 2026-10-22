@@ -1,4 +1,5 @@
 import copy
+from typing import Self
 
 from rich.console import Console
 
@@ -12,21 +13,21 @@ class Pokemon:
         self.level = level
         self.attacks = attacks
 
-    def clone(self) -> Pokemon:
+    def clone(self) -> Self:
         return copy.deepcopy(self)
 
     def display_info(self):
-        console.print(f'''
-        Nombre: {self.name}\nTipo: {self.type}\nNivel: {self.level}\nAtaques: {', '.join(self.attacks)}
-        ''')
+        console.print(f"""
+        Nombre: {self.name}\nTipo: {self.type}\nNivel: {self.level}\nAtaques: {", ".join(self.attacks)}
+        """)
 
 
 def main():
-    base_pokemon = Pokemon('Charmander', 'Fuego', 1, ['Llamarada', 'Arañazo'])
+    base_pokemon = Pokemon("Charmander", "Fuego", 1, ["Llamarada", "Arañazo"])
     clone1 = base_pokemon.clone()
-    clone1.name = 'Charmeleon'
+    clone1.name = "Charmeleon"
     clone1.level = 16
-    clone1.attacks.append('Lanzallamas')
+    clone1.attacks.append("Lanzallamas")
 
     base_pokemon.display_info()
     console.print("")
