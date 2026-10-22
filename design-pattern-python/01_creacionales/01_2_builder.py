@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Self
 
 
 class SortDirection(Enum):
@@ -14,7 +15,7 @@ class QueryBuilder:
         self.order_fields: list[str] = []
         self.limit_count: int | None = None
 
-    def select(self, fields: list[str]) -> QueryBuilder:
+    def select(self, fields: list[str]) -> Self:
         if len(fields) < 1:
             self.fields.append("*")
             return self
@@ -22,16 +23,16 @@ class QueryBuilder:
         self.fields = fields
         return self
 
-    def where(self, condition: str) -> QueryBuilder:
+    def where(self, condition: str) -> Self:
         self.conditions.append(condition)
         return self
 
-    def order_by(self, field: str, direction: SortDirection) -> QueryBuilder:
+    def order_by(self, field: str, direction: SortDirection) -> Self:
         self.order_fields.append(field)
         self.order_fields.append(direction.value)
         return self
 
-    def limit(self, count: int) -> QueryBuilder:
+    def limit(self, count: int) -> Self:
         self.limit_count = count
         return self
 
@@ -51,12 +52,15 @@ class QueryBuilder:
 
 
 def main():
-    users_query = (QueryBuilder("users").select(["id", "name", "email"])
-                   .where("age > 18")
-                   .where("country = 'Cri'")
-                   .order_by("name", SortDirection.ASC)
-                   .limit(10)
-                   .execute())
+    users_query = (
+        QueryBuilder("users")
+        .select(["id", "name", "email"])
+        .where("age > 18")
+        .where("country = 'Cri'")
+        .order_by("name", SortDirection.ASC)
+        .limit(10)
+        .execute()
+    )
 
     print("Consulta:\n")
     print(users_query)
